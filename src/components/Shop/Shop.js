@@ -24,6 +24,7 @@ const Shop = () => {
               key={product.key}
               product={product}
               handleAddToCart={handleAddToCart}
+              fromProductDetails={false}
             ></Product>
           );
         })}

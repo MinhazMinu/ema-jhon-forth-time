@@ -1,11 +1,10 @@
 import React from "react";
-import {  Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCoffee, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
+import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 
-const Product = ({ product, handleAddToCart }) => {
-  const { name, img, seller, price, stock, key } = product;
-  console.log(product.name);
+const Product = ({ product, handleAddToCart, fromProductDetails }) => {
+  const { name, img, seller, price, stock, key, features } = product;
 
   return (
     <div className="d-flex border-bottom">
@@ -22,12 +21,22 @@ const Product = ({ product, handleAddToCart }) => {
         </p>
         <p>by : {seller}</p>
         <p>*Only {stock} left!</p>
-        <button
-          className=" btn btn-xs btn-warning "
-          onClick={() => handleAddToCart(product)}
-        >
-          <FontAwesomeIcon icon={faShoppingCart} /> &nbsp; Add to cart
-        </button>
+        {fromProductDetails ? (
+          features.map(obj => {
+            return (
+              <em key={obj.description}>
+                {obj.description} - {obj.value} <br />
+              </em>
+            );
+          })
+        ) : (
+          <button
+            className=" btn btn-xs btn-warning "
+            onClick={() => handleAddToCart(product)}
+          >
+            <FontAwesomeIcon icon={faShoppingCart} /> &nbsp; Add to cart
+          </button>
+        )}
       </div>
     </div>
   );
