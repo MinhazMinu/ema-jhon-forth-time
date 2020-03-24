@@ -17,13 +17,15 @@ const Cart = ({ cart }) => {
   const grandTotal = totalPrice + shipping + parseFloat(tex);
 
   return (
-    <div className="text-center">
-      <h4 className="border-bottom">Order Summery</h4>
+    <div className="text-center pt-5 pb-2">
+      <h4 className="border-bottom text-info">Order Summery</h4>
       <h6>Product Price : {totalPrice.toFixed(2)} </h6>
       <h6>Order Item : {cart.length} </h6>
       <h6>Shipping : {shipping}</h6>
       <h6>Tex + Vat : {tex} </h6>
-      <h5 className="border-top">Total : {grandTotal.toFixed(2)} </h5>
+      <h5 className="border-top text-info pt-1">
+        Total : {grandTotal.toFixed(2)}{" "}
+      </h5>
     </div>
   );
 };

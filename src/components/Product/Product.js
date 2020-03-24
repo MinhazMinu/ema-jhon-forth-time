@@ -1,10 +1,11 @@
 import React from "react";
-import { useParams, Link } from "react-router-dom";
+import {  Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCoffee, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 
 const Product = ({ product, handleAddToCart }) => {
   const { name, img, seller, price, stock, key } = product;
+  console.log(product.name);
 
   return (
     <div className="d-flex border-bottom">
@@ -12,10 +13,10 @@ const Product = ({ product, handleAddToCart }) => {
         <img src={img} alt="img" />
       </div>
       <div className="pl-2 my-5">
-        <Link to="/product/">
-          {" "}
-          <h6 className="text-primary">{name}</h6>
-        </Link>
+        {" "}
+        <h6 className="text-primary">
+          <Link to={`/product/${key}`}>{name}</Link>
+        </h6>
         <p>
           <small>$ {price}</small>
         </p>
