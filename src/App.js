@@ -7,6 +7,7 @@ import Shop from "./components/Shop/Shop";
 import Review from "./components/Review/Review";
 import Order from "./components/Order/Order";
 import Product from "./components/Product/Product";
+import NotFound from "./components/NotFound/NotFound";
 
 function App() {
   return (
@@ -30,9 +31,7 @@ function App() {
             <Product></Product>
           </Route>
           <Route path="*">
-            <Link to="/">
-              <button className="btn btn-primary  ">Back to home</button>
-            </Link>
+            <NotFound></NotFound>
           </Route>
         </Switch>
       </Router>

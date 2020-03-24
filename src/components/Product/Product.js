@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCoffee, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
 
-const Product = ({ product }) => {
+const Product = ({ product, handleAddToCart }) => {
   const { name, img, seller, price, stock, key } = product;
 
   return (
@@ -21,7 +21,10 @@ const Product = ({ product }) => {
         </p>
         <p>by : {seller}</p>
         <p>*Only {stock} left!</p>
-        <button className=" btn btn-xs btn-warning  ">
+        <button
+          className=" btn btn-xs btn-warning "
+          onClick={() => handleAddToCart(product)}
+        >
           <FontAwesomeIcon icon={faShoppingCart} /> &nbsp; Add to cart
         </button>
       </div>
