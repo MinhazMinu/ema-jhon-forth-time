@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import fakeData from "../../fakeData";
+import Product from "../Product/Product";
 
 const Shop = () => {
   const [products, setProducts] = useState([]);
@@ -11,14 +12,12 @@ const Shop = () => {
 
   return (
     <div className="row">
-      <div className="col-md-9 ml-5 p-5 border-right">
-          {
-              products.map(product => {
-                    
-              })
-          }
+      <div className=" offset-md-1 col-md-8 border-right py-4">
+        {products.map(product => {
+          return <Product key={product.key} product={product}></Product>;
+        })}
       </div>
-      <div className="col-md-2">sdsd</div>
+      <div className=" col-md-2 py-4">sdsd</div>
     </div>
   );
 };

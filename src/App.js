@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Shop from "./components/Shop/Shop";
 import Review from "./components/Review/Review";
 import Order from "./components/Order/Order";
+import Product from "./components/Product/Product";
 
 function App() {
   return (
@@ -24,6 +25,9 @@ function App() {
           </Route>
           <Route path="/manage">
             <Order></Order>
+          </Route>
+          <Route path="/product/:key">
+            <Product></Product>
           </Route>
           <Route path="*">
             <Link to="/">
