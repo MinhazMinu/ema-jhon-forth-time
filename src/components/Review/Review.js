@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from "react";
 import {
   getDatabaseCart,
-  removeFromDatabaseCart
+  removeFromDatabaseCart,
+  processOrder
 } from "../../utilities/databaseManager";
 import ProductDetails from "../ProductDetails/ProductDetails";
 import fakeData from "../../fakeData";
 import ReviewItem from "../ReviewItem/ReviewItem";
 import Cart from "../Cart/Cart";
+import pic from "../../images/giphy.gif";
 
 const Review = () => {
   const [cart, setCart] = useState([]);
+  const [setPic, setSetPic] = useState(false);
   useEffect(() => {
     // lacal storage theke data gulu nilam. data pawa javr {56456464 : 3} erokom vabe
     const savedCart = getDatabaseCart();
@@ -34,9 +37,16 @@ const Review = () => {
     setCart(newCart);
   };
 
+  const handlePlaceOrder = () => {
+    processOrder(cart);
+    setCart([]);
+    setSetPic(true);
+  };
+
   return (
     <div className="d-flex">
       <div className="col-md-9 border-right">
+        {setPic ? <img src={pic} alt="" /> : ""}
         {cart.map(item => (
           <ReviewItem
             key={item.key}
@@ -46,7 +56,14 @@ const Review = () => {
         ))}
       </div>
       <div className="col-md-3">
-        <Cart cart={cart}></Cart>
+        <Cart cart={cart}>
+          <button
+            className="btn btn-warning font-weight-bold"
+            onClick={handlePlaceOrder}
+          >
+            Place Order
+          </button>
+        </Cart>
       </div>
     </div>
   );
