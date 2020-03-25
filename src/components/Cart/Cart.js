@@ -1,8 +1,11 @@
 import React from "react";
 import { text, parse } from "@fortawesome/fontawesome-svg-core";
+import { Link } from "react-router-dom";
+import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Cart = ({ cart }) => {
-  console.log(cart);
+  // console.log(cart);
   const totalPrice = cart.reduce((sum, i) => {
     return (sum += i.price);
   }, 0);
@@ -26,6 +29,11 @@ const Cart = ({ cart }) => {
       <h5 className="border-top text-info pt-1">
         Total : {grandTotal.toFixed(2)}{" "}
       </h5>
+      <Link to={"/review"}>
+        <button className=" btn btn-xs btn-warning ">
+          <FontAwesomeIcon icon={faShoppingCart} /> &nbsp; Review Order
+        </button>
+      </Link>
     </div>
   );
 };
