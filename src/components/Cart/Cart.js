@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const Cart = ({ cart }) => {
   // console.log(cart);
   const totalPrice = cart.reduce((sum, i) => {
-    return (sum += i.price);
+    return (sum += i.price * i.quantity);
   }, 0);
 
   let shipping = 0;

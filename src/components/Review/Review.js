@@ -5,8 +5,8 @@ import {
 } from "../../utilities/databaseManager";
 import ProductDetails from "../ProductDetails/ProductDetails";
 import fakeData from "../../fakeData";
-import Product from "../Product/Product";
 import ReviewItem from "../ReviewItem/ReviewItem";
+import Cart from "../Cart/Cart";
 
 const Review = () => {
   const [cart, setCart] = useState([]);
@@ -35,15 +35,19 @@ const Review = () => {
   };
 
   return (
-    <div>
-      <h1>Cart Item : {cart.length}</h1>
-      {cart.map(item => (
-        <ReviewItem
-          key={item.key}
-          product={item}
-          handleRemoveProduct={handleRemoveProduct}
-        ></ReviewItem>
-      ))}
+    <div className="d-flex">
+      <div className="col-md-9 border-right">
+        {cart.map(item => (
+          <ReviewItem
+            key={item.key}
+            product={item}
+            handleRemoveProduct={handleRemoveProduct}
+          ></ReviewItem>
+        ))}
+      </div>
+      <div className="col-md-3">
+        <Cart cart={cart}></Cart>
+      </div>
     </div>
   );
 };

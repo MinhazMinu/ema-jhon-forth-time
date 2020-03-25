@@ -5,7 +5,7 @@ import "./Header.css";
 import { Link } from "react-router-dom";
 const Header = () => {
   return (
-    <div>
+    <div className="position-sticky">
       <div className="text-center img-fluid ">
         <img src={logo} alt="logo" className="logo" />
       </div>
