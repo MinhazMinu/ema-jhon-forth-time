@@ -6,12 +6,16 @@ const Login = () => {
   const auth = Auth();
   return (
     <div>
-      <button
-        className="btn btn-sm btn-success"
-        onClick={auth.singInWithGoogle}
-      >
-        SignIn with Google
-      </button>
+      {auth.user ? (
+        <button className="btn btn-xm btn-danger">SignOut</button>
+      ) : (
+        <button
+          className="btn btn-sm btn-success"
+          onClick={auth.singInWithGoogle}
+        >
+          SignIn with Google
+        </button>
+      )}
     </div>
   );
 };
