@@ -8,6 +8,7 @@ import Review from "./components/Review/Review";
 import Order from "./components/Order/Order";
 import NotFound from "./components/NotFound/NotFound";
 import ProductDetails from "./components/ProductDetails/ProductDetails";
+import Login from "./components/Login/Login";
 
 function App() {
   return (
@@ -29,6 +30,9 @@ function App() {
           </Route>
           <Route path="/product/:key">
             <ProductDetails></ProductDetails>
+          </Route>
+          <Route path="/login">
+            <Login></Login>
           </Route>
           <Route path="*">
             <NotFound></NotFound>
