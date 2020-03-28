@@ -9,35 +9,38 @@ import Order from "./components/Order/Order";
 import NotFound from "./components/NotFound/NotFound";
 import ProductDetails from "./components/ProductDetails/ProductDetails";
 import Login from "./components/Login/Login";
+import { AuthContextProvider } from "./components/Login/useAuth";
 
 function App() {
   return (
     <div>
       <Router>
-        <Header></Header>
-        <Switch>
-          <Route exact path="/">
-            <Shop></Shop>
-          </Route>
-          <Route path="/shop">
-            <Shop></Shop>
-          </Route>
-          <Route path="/review">
-            <Review></Review>
-          </Route>
-          <Route path="/manage">
-            <Order></Order>
-          </Route>
-          <Route path="/product/:key">
-            <ProductDetails></ProductDetails>
-          </Route>
-          <Route path="/login">
-            <Login></Login>
-          </Route>
-          <Route path="*">
-            <NotFound></NotFound>
-          </Route>
-        </Switch>
+        <AuthContextProvider>
+          <Header></Header>
+          <Switch>
+            <Route exact path="/">
+              <Shop></Shop>
+            </Route>
+            <Route path="/shop">
+              <Shop></Shop>
+            </Route>
+            <Route path="/review">
+              <Review></Review>
+            </Route>
+            <Route path="/manage">
+              <Order></Order>
+            </Route>
+            <Route path="/product/:key">
+              <ProductDetails></ProductDetails>
+            </Route>
+            <Route path="/login">
+              <Login></Login>
+            </Route>
+            <Route path="*">
+              <NotFound></NotFound>
+            </Route>
+          </Switch>
+        </AuthContextProvider>
       </Router>
     </div>
   );
