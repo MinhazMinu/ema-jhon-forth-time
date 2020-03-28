@@ -69,7 +69,7 @@ const Auth = () => {
       });
   };
   const signOut = () => {
-    firebase
+    return firebase
       .auth()
       .signOut()
       .then(function() {

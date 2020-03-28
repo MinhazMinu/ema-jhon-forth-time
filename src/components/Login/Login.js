@@ -9,10 +9,15 @@ const Login = () => {
       window.location.pathname = "review";
     });
   };
+  const handleSignOut = () => {
+    auth.signOut().then(res => {
+      window.location.pathname = "/";
+    });
+  };
   return (
     <div>
       {auth.user ? (
-        <button className="btn btn-xm btn-danger" onClick={auth.signOut}>
+        <button className="btn btn-xm btn-danger" onClick={handleSignOut}>
           SignOut
         </button>
       ) : (

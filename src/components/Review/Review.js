@@ -40,8 +40,8 @@ const Review = () => {
   };
 
   const handlePlaceOrder = () => {
-    processOrder(cart);
     setCart([]);
+    processOrder(cart);
     setSetPic(true);
   };
 
@@ -63,7 +63,10 @@ const Review = () => {
         <Cart cart={cart}>
           <Link to="/shipment">
             {auth.user ? (
-              <button className="btn btn-warning font-weight-bold">
+              <button
+                className="btn btn-warning font-weight-bold"
+                onClick={handlePlaceOrder}
+              >
                 Proceed Checkout
               </button>
             ) : (
