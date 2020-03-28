@@ -1,9 +1,18 @@
 import * as firebase from "firebase/app";
 import "firebase/auth";
 import firebaseConfig from "../../firebase.config";
-import React, { useState, createContext, useContext } from "react";
+import React, { useState, createContext, useContext, useEffect } from "react";
 
 firebase.initializeApp(firebaseConfig);
+
+const getUser = user => {
+  const { displayName, email, photoURL } = user;
+  return {
+    name: displayName,
+    email: email,
+    photo: photoURL
+  };
+};
 
 const AuthContext = createContext();
 // create context provider function
@@ -27,12 +36,7 @@ const Auth = () => {
       .auth()
       .signInWithPopup(provider)
       .then(res => {
-        const { displayName, email, photoURL } = res.user;
-        const singInUser = {
-          name: displayName,
-          email: email,
-          photo: photoURL
-        };
+        const singInUser = getUser(res.user);
         setUser(singInUser);
         return res.user;
       })
@@ -52,6 +56,18 @@ const Auth = () => {
         // An error happened.
       });
   };
+
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged(function(usr) {
+      if (usr) {
+        const currUser = getUser(usr);
+        setUser(currUser);
+      } else {
+        // No user is signed in.
+      }
+    });
+  }, []);
+
   return {
     user,
     signOut,

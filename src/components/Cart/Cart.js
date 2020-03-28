@@ -1,7 +1,9 @@
 import React from "react";
 import { text, parse } from "@fortawesome/fontawesome-svg-core";
+import { UseAuth } from "../Login/useAuth";
 
 const Cart = props => {
+  const auth = UseAuth();
   // console.log(cart);
   const totalPrice = props.cart.reduce((sum, i) => {
     return (sum += i.price * i.quantity);
