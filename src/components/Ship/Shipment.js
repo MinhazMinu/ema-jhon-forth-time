@@ -78,7 +78,7 @@ const Shipment = () => {
         )}
 
         <input
-          className="form-control pt-2 m-2btn btn-xs btn-warning rounded "
+          className="form-control pt-2 m-2 btn btn-xs btn-warning rounded "
           type="submit"
         />
       </div>
