@@ -10,6 +10,7 @@ import NotFound from "./components/NotFound/NotFound";
 import ProductDetails from "./components/ProductDetails/ProductDetails";
 import Login from "./components/Login/Login";
 import { AuthContextProvider } from "./components/Login/useAuth";
+import Shipment from "./components/Ship/Shipment";
 
 function App() {
   return (
@@ -35,6 +36,9 @@ function App() {
             </Route>
             <Route path="/login">
               <Login></Login>
+            </Route>
+            <Route path="/shipment">
+              <Shipment></Shipment>
             </Route>
             <Route path="*">
               <NotFound></NotFound>
