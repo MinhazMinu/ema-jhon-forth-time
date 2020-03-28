@@ -4,6 +4,11 @@ import Auth from "./useAuth";
 
 const Login = () => {
   const auth = Auth();
+  const handleSignIn = () => {
+    auth.singInWithGoogle().then(res => {
+      window.location.pathname = "review";
+    });
+  };
   return (
     <div>
       {auth.user ? (
@@ -11,10 +16,7 @@ const Login = () => {
           SignOut
         </button>
       ) : (
-        <button
-          className="btn btn-sm btn-success"
-          onClick={auth.singInWithGoogle}
-        >
+        <button className="btn btn-sm btn-success" onClick={handleSignIn}>
           SignIn with Google
         </button>
       )}

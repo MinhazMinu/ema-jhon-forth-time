@@ -10,6 +10,7 @@ import ReviewItem from "../ReviewItem/ReviewItem";
 import Cart from "../Cart/Cart";
 import pic from "../../images/giphy.gif";
 import { Link } from "react-router-dom";
+import { UseAuth } from "../Login/useAuth";
 
 const Review = () => {
   const [cart, setCart] = useState([]);
@@ -44,6 +45,8 @@ const Review = () => {
     setSetPic(true);
   };
 
+  const auth = UseAuth();
+
   return (
     <div className="d-flex">
       <div className="col-md-9 border-right">
@@ -59,13 +62,15 @@ const Review = () => {
       <div className="col-md-3">
         <Cart cart={cart}>
           <Link to="/shipment">
-            <button
-              className="btn btn-warning font-weight-bold"
-              ProCeed
-              CheCkOut
-            >
-              Place Order
-            </button>
+            {auth.user ? (
+              <button className="btn btn-warning font-weight-bold">
+                Proceed Checkout
+              </button>
+            ) : (
+              <button className="btn btn-warning font-weight-bold">
+                Login to Proceed
+              </button>
+            )}
           </Link>
         </Cart>
       </div>

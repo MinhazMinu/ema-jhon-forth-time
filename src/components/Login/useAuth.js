@@ -55,7 +55,7 @@ const Auth = () => {
   //   inner function singInWithGoogle
   const singInWithGoogle = () => {
     const provider = new firebase.auth.GoogleAuthProvider();
-    firebase
+    return firebase
       .auth()
       .signInWithPopup(provider)
       .then(res => {
