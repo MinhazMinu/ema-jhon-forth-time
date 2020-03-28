@@ -41,8 +41,20 @@ const Auth = () => {
         return err.message;
       });
   };
+  const signOut = () => {
+    firebase
+      .auth()
+      .signOut()
+      .then(function() {
+        setUser(null);
+      })
+      .catch(function(error) {
+        // An error happened.
+      });
+  };
   return {
     user,
+    signOut,
     singInWithGoogle
   };
 };

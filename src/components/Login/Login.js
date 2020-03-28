@@ -7,7 +7,9 @@ const Login = () => {
   return (
     <div>
       {auth.user ? (
-        <button className="btn btn-xm btn-danger">SignOut</button>
+        <button className="btn btn-xm btn-danger" onClick={auth.signOut}>
+          SignOut
+        </button>
       ) : (
         <button
           className="btn btn-sm btn-success"
