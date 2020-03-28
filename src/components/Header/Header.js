@@ -1,9 +1,13 @@
 import React from "react";
 import logo from "../../logo.png";
+import { UseAuth } from "../Login/useAuth";
 
 import "./Header.css";
 import { Link } from "react-router-dom";
 const Header = () => {
+  const auth = UseAuth();
+  console.log(auth);
+
   return (
     <div className="position-sticky">
       <div className="text-center img-fluid ">

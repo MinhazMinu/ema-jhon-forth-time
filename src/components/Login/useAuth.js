@@ -1,17 +1,21 @@
 import * as firebase from "firebase/app";
 import "firebase/auth";
 import firebaseConfig from "../../firebase.config";
-import React, { useState, createContext } from "react";
+import React, { useState, createContext, useContext } from "react";
 
 firebase.initializeApp(firebaseConfig);
 
 const AuthContext = createContext();
+// create context provider function
 export const AuthContextProvider = props => {
   const auth = Auth();
   return (
     <AuthContext.Provider value={auth}>{props.children} </AuthContext.Provider>
   );
 };
+
+// create context Consume function
+export const UseAuth = () => useContext(AuthContext);
 
 // Auth function
 const Auth = () => {
