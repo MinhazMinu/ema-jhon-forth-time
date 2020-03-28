@@ -9,7 +9,7 @@ import Order from "./components/Order/Order";
 import NotFound from "./components/NotFound/NotFound";
 import ProductDetails from "./components/ProductDetails/ProductDetails";
 import Login from "./components/Login/Login";
-import { AuthContextProvider } from "./components/Login/useAuth";
+import { AuthContextProvider, PrivateRoute } from "./components/Login/useAuth";
 import Shipment from "./components/Ship/Shipment";
 
 function App() {
@@ -37,9 +37,9 @@ function App() {
             <Route path="/login">
               <Login></Login>
             </Route>
-            <Route path="/shipment">
+            <PrivateRoute path="/shipment">
               <Shipment></Shipment>
-            </Route>
+            </PrivateRoute>
             <Route path="*">
               <NotFound></NotFound>
             </Route>
