@@ -74,9 +74,11 @@ const Auth = () => {
       .signOut()
       .then(function() {
         setUser(null);
+        return true;
       })
       .catch(function(error) {
         // An error happened.
+        return false;
       });
   };
 
