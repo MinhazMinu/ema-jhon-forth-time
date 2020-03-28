@@ -58,6 +58,15 @@ const Review = () => {
             handleRemoveProduct={handleRemoveProduct}
           ></ReviewItem>
         ))}
+        {!cart.length && (
+          <h4 className="text-warning text-center">
+            Your Cart Is Empty!{" "}
+            <Link to="/">
+              {" "}
+              <br /> Click Here to Keep Shopping
+            </Link>{" "}
+          </h4>
+        )}
       </div>
       <div className="col-md-3">
         <Cart cart={cart}>
