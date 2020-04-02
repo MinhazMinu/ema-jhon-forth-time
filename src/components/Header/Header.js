@@ -3,7 +3,7 @@ import logo from "../../logo.png";
 import { UseAuth } from "../Login/useAuth";
 
 import "./Header.css";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 const Header = () => {
   const auth = UseAuth();
 
@@ -15,7 +15,7 @@ const Header = () => {
       <nav className=" header-nav ">
         <a href="/shop">Shop</a>
         <a href="/review">Order Review</a>
-        <a href="/manage">Manage</a>
+        <a href="/inventory">Inventory</a>
         {auth.user && (
           <span className="text-success">WelCome! {auth.user.name} </span>
         )}

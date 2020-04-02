@@ -4,7 +4,7 @@ import {
   removeFromDatabaseCart,
   processOrder
 } from "../../utilities/databaseManager";
-import ProductDetails from "../ProductDetails/ProductDetails";
+// import ProductDetails from "../ProductDetails/ProductDetails";
 import fakeData from "../../fakeData";
 import ReviewItem from "../ReviewItem/ReviewItem";
 import Cart from "../Cart/Cart";
