@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from "react";
 import {
   getDatabaseCart,
-  removeFromDatabaseCart,
-  processOrder
+  removeFromDatabaseCart
 } from "../../utilities/databaseManager";
 // import ProductDetails from "../ProductDetails/ProductDetails";
 
 import ReviewItem from "../ReviewItem/ReviewItem";
 import Cart from "../Cart/Cart";
-import pic from "../../images/giphy.gif";
+
 import { Link } from "react-router-dom";
 import { UseAuth } from "../Login/useAuth";
 
 const Review = () => {
   const [cart, setCart] = useState([]);
-  const [setPic, setSetPic] = useState(false);
+
   useEffect(() => {
     // lacal storage theke data gulu nilam. data pawa javr {56456464 : 3} erokom vabe
     const savedCart = getDatabaseCart();
@@ -49,18 +48,11 @@ const Review = () => {
     setCart(newCart);
   };
 
-  const handlePlaceOrder = () => {
-    setCart([]);
-    processOrder(cart);
-    setSetPic(true);
-  };
-
   const auth = UseAuth();
 
   return (
     <div className="d-flex">
       <div className="col-md-9 border-right">
-        {setPic ? <img src={pic} alt="" /> : ""}
         {cart.map(item => (
           <ReviewItem
             key={item.key}
@@ -84,7 +76,7 @@ const Review = () => {
             {auth.user ? (
               <button
                 className="btn btn-warning font-weight-bold"
-                onClick={handlePlaceOrder}
+                // onClick={handlePlaceOrder}
               >
                 Proceed Checkout
               </button>
