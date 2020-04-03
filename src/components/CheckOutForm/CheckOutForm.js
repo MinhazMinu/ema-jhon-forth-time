@@ -2,8 +2,11 @@ import React from "react";
 
 import { loadStripe } from "@stripe/stripe-js";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
+import { useState } from "react";
 
 const CheckoutForm = () => {
+  const [paymentError, setPaymentError] = useState(null);
+  const [paymentFinished, setPaymentFinished] = useState(null);
   const stripe = useStripe();
   const elements = useElements();
 
@@ -13,6 +16,14 @@ const CheckoutForm = () => {
       type: "card",
       card: elements.getElement(CardElement)
     });
+    if (error) {
+      setPaymentError(error.message);
+      setPaymentFinished(null);
+    } else {
+      setPaymentFinished(paymentMethod);
+      setPaymentError(null);
+    }
+    console.log("stripe => ", error, paymentMethod);
   };
 
   return (
@@ -21,6 +32,12 @@ const CheckoutForm = () => {
       <button type="submit" disabled={!stripe}>
         Pay
       </button>
+      {paymentError && (
+        <div>
+          <p className="text-danger">{paymentError}</p>
+        </div>
+      )}
+      {paymentFinished && <p className="text-success">Payment Successful!</p>}
     </form>
   );
 };

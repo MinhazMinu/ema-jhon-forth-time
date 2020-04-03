@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { UseAuth } from "../Login/useAuth";
 import { getDatabaseCart, processOrder } from "../../utilities/databaseManager";
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
+import CheckoutForm from "../CheckOutForm/CheckOutForm";
 
 const Shipment = () => {
   const { register, handleSubmit, errors } = useForm();
+  const [shipInfoAdded, setShipInfoAdded] = useState(null);
+  const stripePromise = loadStripe(
+    "pk_test_JNFbMIc1RcL6EyosU4vkgjep00hLE5jnGF"
+  );
   const auth = UseAuth();
   const onSubmit = data => {
     //TODO : Moved this after payment
@@ -24,15 +31,19 @@ const Shipment = () => {
     })
       .then(res => res.json())
       .then(order => {
-        alert("Successfully Placed your order with order id " + order._id);
-        processOrder();
+        setShipInfoAdded(true);
+        // alert("Successfully Placed your order with order id " + order._id);
+        // processOrder();
       });
   };
 
   return (
     <div className="container">
       <div className="row m-5">
-        <div className="col-md-6 border-right ">
+        <div
+          className="col-md-6 border-right  "
+          style={{ display: shipInfoAdded && "none" }}
+        >
           <h4 className="text-center ">Shipping Information</h4>{" "}
           <form
             onSubmit={handleSubmit(onSubmit)}
@@ -109,8 +120,14 @@ const Shipment = () => {
             </div>
           </form>
         </div>
-        <div className="col-md-6 d-flex justify-content-center ">
-          <h4>Payment Information</h4>
+        <div
+          className="col-md-6"
+          style={{ display: shipInfoAdded ? "block" : "none" }}
+        >
+          <h4 className="mb-4">Payment Information</h4>
+          <Elements stripe={stripePromise}>
+            <CheckoutForm />
+          </Elements>
         </div>
       </div>
     </div>
