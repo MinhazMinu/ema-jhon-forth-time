@@ -1,27 +1,35 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { UseAuth } from "../Login/useAuth";
-import { getDatabaseCart, processOrder } from "../../utilities/databaseManager";
+import {
+  getDatabaseCart,
+  clearLocalShoppingCart
+} from "../../utilities/databaseManager";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "../CheckOutForm/CheckOutForm";
 
 const Shipment = () => {
   const { register, handleSubmit, errors } = useForm();
-  const [shipInfoAdded, setShipInfoAdded] = useState(null);
+  const [shipInfo, setShipInfo] = useState(null);
+  const [orderId, setOrderId] = useState(null);
   const stripePromise = loadStripe(
     "pk_test_JNFbMIc1RcL6EyosU4vkgjep00hLE5jnGF"
   );
   const auth = UseAuth();
   const onSubmit = data => {
-    //TODO : Moved this after payment
+    setShipInfo(true);
+    // TODO : Moved this after payment
+  };
+
+  const handlePlaceOrder = payment => {
     const savedCart = getDatabaseCart();
     const orderDetails = {
       email: auth.user.email,
       cart: savedCart,
-      shipment: data
+      shipment: shipInfo,
+      payment: payment
     };
-
     fetch("http://localhost:4200/placeOrder", {
       method: "POST",
       headers: {
@@ -31,9 +39,9 @@ const Shipment = () => {
     })
       .then(res => res.json())
       .then(order => {
-        setShipInfoAdded(true);
+        setOrderId(order._id);
         // alert("Successfully Placed your order with order id " + order._id);
-        // processOrder();
+        clearLocalShoppingCart();
       });
   };
 
@@ -42,7 +50,7 @@ const Shipment = () => {
       <div className="row m-5">
         <div
           className="col-md-6 border-right  "
-          style={{ display: shipInfoAdded && "none" }}
+          style={{ display: shipInfo && "none" }}
         >
           <h4 className="text-center ">Shipping Information</h4>{" "}
           <form
@@ -122,12 +130,19 @@ const Shipment = () => {
         </div>
         <div
           className="col-md-6"
-          style={{ display: shipInfoAdded ? "block" : "none" }}
+          style={{ display: shipInfo ? "block" : "none" }}
         >
           <h4 className="mb-4">Payment Information</h4>
           <Elements stripe={stripePromise}>
-            <CheckoutForm />
-          </Elements>
+            <CheckoutForm handlePlaceOrder={handlePlaceOrder} />
+          </Elements>{" "}
+          <br />
+          {orderId && (
+            <div>
+              <h3>Thank you for shopping with us!</h3>
+              <p>Your order id is {orderId}</p>
+            </div>
+          )}
         </div>
       </div>
     </div>
