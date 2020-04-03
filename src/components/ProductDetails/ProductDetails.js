@@ -13,7 +13,7 @@ const ProductDetails = () => {
     fetch(`http://localhost:4200/product/${key}`)
       .then(res => res.json())
       .then(data => setProduct(data));
-  }, []);
+  }, [key]);
 
   // const { name, price, img, seller, features, stock } = singleProduct;
 
